@@ -1,4 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('JavaScript loaded');
-    // Add any interactive code here
+document.querySelectorAll('nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
 });

@@ -2,13 +2,23 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
 }
 
 header {
     background-color: #333;
     color: #fff;
-    padding: 1em;
+    padding: 1em 0;
     text-align: center;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 header nav ul {
@@ -24,13 +34,41 @@ header nav ul li {
 header nav ul li a {
     color: #fff;
     text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #00aaff;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
 }
 
 section {
-    padding: 2em;
-    margin: 2em 0;
+    padding: 2em 0;
+    background: #fff;
+    margin: 1em 0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.project {
-    margin-bottom: 1em;
+.project img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    display: block;
+    margin: 1em 0;
+}
+
+#contact p a {
+    color: #00aaff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+#contact p a:hover {
+    color: #333;
 }
