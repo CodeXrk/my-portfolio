@@ -4,12 +4,23 @@ function loadContent(section) {
     xhr.onload = function() {
         if (this.status === 200) {
             document.getElementById('content').innerHTML = this.responseText;
+            if (section === 'experience' || section === 'projects') {
+                addTimelineClickEvents();
+            }
         }
     };
     xhr.send();
 }
 
-// Load the home section by default
+function addTimelineClickEvents() {
+    const timelinePanels = document.querySelectorAll('.timeline-panel');
+    timelinePanels.forEach(panel => {
+        panel.addEventListener('click', function() {
+            panel.classList.toggle('active');
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     loadContent('home');
 });
