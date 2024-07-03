@@ -1,15 +1,37 @@
 function loadContent(section) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('GET', `sections/${section}.html`, true);
-    xhr.onload = function() {
-        if (this.status === 200) {
-            document.getElementById('content').innerHTML = this.responseText;
-            if (section === 'experience' || section === 'projects') {
-                addTimelineClickEvents();
-            }
-        }
+    document.querySelectorAll('.sidebar nav ul li a').forEach(link => {
+        link.classList.remove('active');
+    });
+    document.querySelector(`.sidebar nav ul li a[href="#${section}"]`).classList.add('active');
+    
+    document.querySelectorAll('section').forEach(sec => {
+        sec.style.display = 'none';
+    });
+    document.querySelector(`#${section}`).style.display = 'block';
+
+    window.location.hash = section;
+}
+
+function addScrollSpy() {
+    const sections = document.querySelectorAll('section');
+    const options = {
+        threshold: 0.6
     };
-    xhr.send();
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                document.querySelectorAll('.sidebar nav ul li a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                document.querySelector(`.sidebar nav ul li a[href="#${entry.target.id}"]`).classList.add('active');
+            }
+        });
+    }, options);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
 }
 
 function addTimelineClickEvents() {
@@ -22,5 +44,10 @@ function addTimelineClickEvents() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    loadContent('home');
+    document.querySelectorAll('section').forEach(sec => {
+        sec.style.display = 'none';
+    });
+    document.querySelector('#home').style.display = 'block';
+    addScrollSpy();
+    addTimelineClickEvents();
 });
