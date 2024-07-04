@@ -19,7 +19,7 @@ body {
     left: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center; /* Center content vertically */
 }
 
 .sidebar h1 {
@@ -29,6 +29,9 @@ body {
 .sidebar nav ul {
     list-style-type: none;
     padding: 0;
+    margin: 0 auto; /* Center horizontally */
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
 .sidebar nav ul li {
