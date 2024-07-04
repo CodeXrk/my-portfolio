@@ -36,4 +36,4 @@ document.addEventListener('DOMContentLoaded', function() {
             panel.classList.toggle('active');
         });
     });
-});
+}); 
