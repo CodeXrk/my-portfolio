@@ -159,24 +159,38 @@ section {
     margin-left: -2px;
 }
 
+.timeline-year {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
 .timeline-item {
     margin: 0 0 2em 0;
     position: relative;
 }
 
-.timeline-item::before,
-.timeline-item::after {
-    content: '';
-    display: table;
+.timeline-item.left .timeline-panel {
+    float: left;
+    margin-right: 50%;
+    padding-right: 20px;
+    text-align: right;
 }
 
-.timeline-item::after {
-    clear: both;
+.timeline-item.right .timeline-panel {
+    float: right;
+    margin-left: 50%;
+    padding-left: 20px;
+    text-align: left;
 }
 
 .timeline-panel {
-    width: 46%;
-    float: left;
+    width: 45%;
     border: 1px solid #d4d4d4;
     background: #fff;
     padding: 1em;
@@ -190,24 +204,21 @@ section {
     display: inline-block;
     position: absolute;
     top: 26px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.timeline-item.left .timeline-panel::before {
     right: -15px;
-    border-top: 15px solid transparent;
-    border-left: 15px solid #d4d4d4;
-    border-right: 0 solid #d4d4d4;
-    border-bottom: 15px solid transparent;
+    border-width: 15px 0 15px 15px;
+    border-color: transparent transparent transparent #d4d4d4;
 }
 
-.timeline-inverted .timeline-panel {
-    float: right;
-}
-
-.timeline-inverted .timeline-panel::before {
-    right: auto;
+.timeline-item.right .timeline-panel::before {
     left: -15px;
-    border-left-width: 0;
-    border-right-width: 15px;
-    border-left-color: transparent;
-    border-right-color: #d4d4d4;
+    border-width: 15px 15px 15px 0;
+    border-color: transparent #d4d4d4 transparent transparent;
 }
 
 .timeline-panel:hover {
