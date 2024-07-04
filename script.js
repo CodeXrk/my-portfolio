@@ -1,18 +1,15 @@
-function loadContent(section) {
+document.addEventListener('DOMContentLoaded', function() {
+    // Add smooth scrolling to all links
     document.querySelectorAll('.sidebar nav ul li a').forEach(link => {
-        link.classList.remove('active');
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
     });
-    document.querySelector(`.sidebar nav ul li a[href="#${section}"]`).classList.add('active');
-    
-    document.querySelectorAll('section').forEach(sec => {
-        sec.style.display = 'none';
-    });
-    document.querySelector(`#${section}`).style.display = 'block';
 
-    window.location.hash = section;
-}
-
-function addScrollSpy() {
+    // Add scroll spy functionality
     const sections = document.querySelectorAll('section');
     const options = {
         threshold: 0.6
@@ -32,22 +29,11 @@ function addScrollSpy() {
     sections.forEach(section => {
         observer.observe(section);
     });
-}
 
-function addTimelineClickEvents() {
-    const timelinePanels = document.querySelectorAll('.timeline-panel');
-    timelinePanels.forEach(panel => {
+    // Add click events for timeline panels
+    document.querySelectorAll('.timeline-panel').forEach(panel => {
         panel.addEventListener('click', function() {
             panel.classList.toggle('active');
         });
     });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('section').forEach(sec => {
-        sec.style.display = 'none';
-    });
-    document.querySelector('#home').style.display = 'block';
-    addScrollSpy();
-    addTimelineClickEvents();
 });
