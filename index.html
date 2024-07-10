@@ -6,6 +6,7 @@
     <title>Rudransh Katiyar - Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
     <div class="sidebar">
@@ -25,9 +26,9 @@
     </div>
 
     <main>
-        <section id="home">
+        <section id="home" class="parallax">
             <div class="container">
-                <h2>Welcome to My Portfolio</h2>
+                <h2 class="animated-text">Welcome to My Portfolio</h2>
                 <p>Welcome to my professional portfolio! My name is Rudransh Katiyar, and I am a dedicated and passionate Graduate Mechanical Engineer. Through this portfolio, I aim to showcase my skills, experiences, and projects that reflect my journey and growth in the field of mechanical engineering.</p>
                 <p>In this portfolio, you will find:</p>
                 <ul>
@@ -43,8 +44,7 @@
             </div>
         </section>
 
-
-        <section id="about">
+        <section id="about" class="parallax">
             <div class="container">
                 <h2>About Me</h2>
                 <p>I am a dedicated and adaptable Graduate Mechanical Engineer with a passion for sustainable practices and innovative solutions. My journey in mechanical engineering has equipped me with a solid foundation in CAD modeling, finite element analysis, and hands-on problem-solving. I thrive in collaborative environments and am always eager to take on new challenges.</p>
@@ -53,8 +53,8 @@
             </div>
         </section>
 
-        <section id="education">
-            <<div class="container">
+        <section id="education" class="parallax">
+            <div class="container">
                 <h2>Education</h2>
                 <p><strong>The Australian National University</strong></p>
                 <p>Bachelor of Engineering (Hons): Mechanical Engineering [Expected graduation – 07/24]</p>
@@ -62,7 +62,7 @@
             </div>
         </section>
 
-        <section id="certifications">
+        <section id="certifications" class="parallax">
             <div class="container">
                 <h2>Certifications</h2>
                 <ul>
@@ -73,34 +73,34 @@
             </div>
         </section>
 
-        <section id="projects">
+        <section id="projects" class="parallax">
             <div class="container">
                 <h2>Projects</h2>
                 <ul class="timeline">
                     <li class="timeline-year">2023</li>
                     <li class="timeline-item left">
-                        <div class="timeline-panel" data-description="Brief description of Australian waste management for metals">
+                        <div class="timeline-panel">
                             <h3><i class="fas fa-recycle"></i> Australian Waste Management for Metals</h3>
                             <p class="timeline-details">Led a project focused on developing sustainable waste management solutions for metal recycling in Australia. Conducted extensive research and analysis to identify best practices and innovative technologies for improving metal recycling processes.</p>
                         </div>
                     </li>
                     <li class="timeline-year">2022</li>
                     <li class="timeline-item right">
-                        <div class="timeline-panel" data-description="Brief description of Knee clamp robotics">
+                        <div class="timeline-panel">
                             <h3><i class="fas fa-robot"></i> Knee Clamp Robotics</h3>
                             <p class="timeline-details">Designed and developed a robotic knee clamp system aimed at assisting in medical procedures. Utilized CAD modeling and finite element analysis to ensure structural integrity and functionality. Collaborated with a team to prototype and test the system.</p>
                         </div>
                     </li>
                     <li class="timeline-year">2021</li>
                     <li class="timeline-item left">
-                        <div class="timeline-panel" data-description="Brief description of App development (unbranded.in)">
+                        <div class="timeline-panel">
                             <h3><i class="fas fa-mobile-alt"></i> App Development (unbranded.in)</h3>
                             <p class="timeline-details">Worked on the development of an innovative mobile application aimed at providing unbranded, high-quality products to consumers. Contributed to the app's design and user interface, ensuring a seamless and user-friendly experience.</p>
                         </div>
                     </li>
                     <li class="timeline-year">2020</li>
                     <li class="timeline-item right">
-                        <div class="timeline-panel" data-description="Brief description of CAD Projects">
+                        <div class="timeline-panel">
                             <h3><i class="fas fa-car"></i> CAD Projects</h3>
                             <p class="timeline-details">Engaged in multiple CAD projects including FSAE car chassis design, V6 engine modeling, robotic arm development, building stress analysis, CubeSat structure design, and Mars rover body creation. These projects highlighted my proficiency in CAD tools and my ability to solve complex engineering problems.</p>
                         </div>
@@ -109,7 +109,7 @@
             </div>
         </section>
 
-        <section id="skills">
+        <section id="skills" class="parallax">
             <div class="container">
                 <h2>Skills</h2>
                 <div class="skills-grid">
@@ -157,7 +157,7 @@
                     </div>
                     <div class="skill">
                         <i class="fas fa-tasks"></i>
-                        <h3>Project management</h3>
+                        <h3>Project Management</h3>
                         <div class="progress-bar">
                             <div class="progress" style="width: 80%;"></div>
                         </div>
@@ -194,48 +194,48 @@
             </div>
         </section>
 
-        <section id="experience">
+        <section id="experience" class="parallax">
             <div class="container">
                 <h2>Experience</h2>
                 <ul class="timeline">
                     <li class="timeline-year">2023</li>
                     <li class="timeline-item left">
-                        <div class="timeline-panel" data-description="Brief description of Retail Sales Associate at Uniqlo">
+                        <div class="timeline-panel">
                             <h3><i class="fas fa-store"></i> Retail Sales Associate | Uniqlo (Sep 2023 - Current)</h3>
                             <p class="timeline-details">Maintained knowledge of current sales, promotions, and special offers. Managed stockroom organization, including receiving shipments and packing goods.</p>
                         </div>
                     </li>
                     <li class="timeline-year">2023</li>
                     <li class="timeline-item right">
-                        <div class="timeline-panel" data-description="Brief description of Retail Sales Associate at Under Armour">
+                        <div class="timeline-panel">
                             <h3><i class="fas fa-store"></i> Retail Sales Associate | Under Armour (May 2023 - Current)</h3>
                             <p class="timeline-details">Handled customer complaints professionally to resolve issues quickly and effectively. Operated cash registers accurately to process payments and issue receipts.</p>
                         </div>
                     </li>
                     <li class="timeline-year">2021</li>
                     <li class="timeline-item left">
-                        <div class="timeline-panel" data-description="Brief description of CAD Designer at ANU Formula Sport">
+                        <div class="timeline-panel">
                             <h3><i class="fas fa-cogs"></i> CAD Designer | ANU Formula Sport (Sep 2021 - Jun 2022)</h3>
                             <p class="timeline-details">Developed CAD models and drawings for product development. Collaborated on new designs, chassis manufacturing, and FEA.</p>
                         </div>
                     </li>
                     <li class="timeline-year">2021</li>
                     <li class="timeline-item right">
-                        <div class="timeline-panel" data-description="Brief description of Mechanical Engineering Intern at VMix">
+                        <div class="timeline-panel">
                             <h3><i class="fas fa-industry"></i> Mechanical Engineering Intern | VMix Mineral Technologies Pvt Ltd. (Mar 2021 - Jun 2021)</h3>
                             <p class="timeline-details">Developed CAD models to evaluate designs. Improved technical abilities by practical learning and manufacturing. Wrote engineering documentation and tracked supply inventories.</p>
                         </div>
                     </li>
                     <li class="timeline-year">2021</li>
                     <li class="timeline-item left">
-                        <div class="timeline-panel" data-description="Brief description of Global Social Impact Virtual Program Intern at Unbound">
+                        <div class="timeline-panel">
                             <h3><i class="fas fa-globe"></i> Global Social Impact Virtual Program Intern | Unbound (Jan 2021 - Feb 2021)</h3>
                             <p class="timeline-details">Worked on a project providing clean water to rural areas in Vietnam. Collaborated with local communities to address water access issues and designed sustainable solutions to improve water quality and availability.</p>
                         </div>
                     </li>
                     <li class="timeline-year">2019</li>
                     <li class="timeline-item right">
-                        <div class="timeline-panel" data-description="Brief description of Manufacturing Specialist at Technocrats Robotics">
+                        <div class="timeline-panel">
                             <h3><i class="fas fa-robot"></i> Manufacturing Specialist | Technocrats Robotics (Oct 2018 - Aug 2019)</h3>
                             <p class="timeline-details">Identified process optimization opportunities and FEA. Assisted in designing and constructing new rover designs.</p>
                         </div>
@@ -244,19 +244,49 @@
             </div>
         </section>
 
-       <section id="contact">
+        <section id="contact" class="parallax">
             <div class="container">
                 <h2>Contact</h2>
                 <p>I am always open to connecting with fellow professionals, potential collaborators, and anyone interested in my work. Here are the ways you can get in touch with me:</p>
                 <p><strong>Email:</strong> <a href="mailto:u7156351@anu.edu.au">u7156351@anu.edu.au</a></p>
-                <p><strong>Personal Email:</strong> <a href="mailto:rudransh.katiyar2000@gmail.com">rudransh.katiyar2000@gmail.com</a></p>
                 <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/rudransh-katiyar" target="_blank">www.linkedin.com/in/rudransh-katiyar</a></p>
                 <p><strong>Phone:</strong> +61 405264265</p>
                 <p>Feel free to reach out for professional inquiries, collaborations, or just to connect and discuss our shared interests in engineering and technology. I look forward to hearing from you!</p>
             </div>
         </section>
+
+        <section id="map-section" class="parallax">
+            <div class="container">
+                <h2>Map</h2>
+                <div id="map" style="height: 400px;"></div>
+            </div>
+        </section>
+
+        <section id="chart-section" class="parallax">
+            <div class="container">
+                <h2>Chart</h2>
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </div>
+        </section>
     </main>
 
+    <div class="scroll-indicator">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <button id="dark-mode-toggle">Toggle Dark Mode</button>
+
+    <div id="loading-spinner" class="loading-spinner"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
