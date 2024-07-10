@@ -5,7 +5,48 @@ body {
     line-height: 1.6;
     background-color: #f4f4f4;
     color: #333;
+}
+
+.landing-container {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('images/landing-bg.jpg') no-repeat center center/cover;
+    text-align: center;
+    color: #fff;
+}
+
+.landing-container h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.landing-container p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+}
+
+.landing-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.landing-buttons button {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.landing-buttons button:hover {
+    background: #00aaff;
 }
 
 .sidebar {
