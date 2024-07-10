@@ -36,4 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
             panel.classList.toggle('active');
         });
     });
+
+    // Check if there's a hash in the URL and scroll to the corresponding section
+    if (window.location.hash) {
+        document.querySelector(window.location.hash).scrollIntoView({
+            behavior: 'smooth'
+        });
+    }
 });
