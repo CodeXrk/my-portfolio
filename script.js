@@ -15,6 +15,36 @@ document.addEventListener('DOMContentLoaded', function() {
         threshold: 0.6
     };
 
+    const sections = document.querySelectorAll('section');
+
+let currentSection = 0;
+
+function updateSections() {
+    sections.forEach((section, index) => {
+        section.classList.add('section-hidden');
+        section.classList.remove('section-visible', 'section-left');
+        
+        if (index === currentSection) {
+            section.classList.add('section-visible');
+            section.classList.remove('section-hidden');
+        } else if (index < currentSection) {
+            section.classList.add('section-left');
+        }
+    });
+}
+
+window.addEventListener('wheel', (event) => {
+    if (event.deltaY > 0 && currentSection < sections.length - 1) {
+        currentSection++;
+    } else if (event.deltaY < 0 && currentSection > 0) {
+        currentSection--;
+    }
+    updateSections();
+});
+
+updateSections();
+
+
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
