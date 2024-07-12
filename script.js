@@ -47,7 +47,15 @@ document.addEventListener('DOMContentLoaded', function() {
     panel.addEventListener('click', function() {
         panel.classList.toggle('active');
     });
-});
+
+
+      // Add touch event listeners for mobile devices
+    panel.addEventListener('touchstart', function() {
+        panel.classList.add('active');
+    });
+    panel.addEventListener('touchend', function() {
+        panel.classList.toggle('active');
+    });
 
 
     // Check if there's a hash in the URL and scroll to the corresponding section
