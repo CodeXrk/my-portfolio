@@ -81,6 +81,28 @@ section {
     min-height: 100vh; /* Ensure each section has a minimum height */
 }
 
+/* Adjusting parallax effect and background size for smaller screens */
+@media (max-width: 768px) {
+    .parallax {
+        background-attachment: scroll;
+        background-size: cover;
+        min-height: 50vh; /* Adjust as needed */
+    }
+
+    main {
+        margin-top: 60px; /* Adjust based on the header height */
+    }
+
+    .header nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header nav ul li {
+        margin: 5px 0;
+    }
+}
+
 .parallax {
     background-attachment: fixed;
     background-size: cover;
@@ -214,7 +236,7 @@ section {
 }
 
 .timeline-panel {
-    width: 45%;
+    width: 100%;
     border: 1px solid #d4d4d4;
     background: #fff;
     padding: 1em;
@@ -233,6 +255,16 @@ section {
     width: 0;
     height: 0;
     border-style: solid;
+}
+
+.timeline-item.left .timeline-panel, .timeline-item.right .timeline-panel {
+    float: none;
+    margin: 0;
+    padding: 1em 0;
+}
+
+.timeline-panel::before {
+    display: none;
 }
 
 .timeline-item.left .timeline-panel::before {
