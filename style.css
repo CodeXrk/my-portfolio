@@ -1,7 +1,3 @@
-html {
-    scroll-behavior: smooth;
-}
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -9,8 +5,6 @@ body {
     line-height: 1.6;
     background-color: #f4f4f4;
     color: #333;
-    display: flex;
-    flex-direction: column; /* Ensure sections stack vertically */
 }
 
 .header {
@@ -55,61 +49,24 @@ body {
     color: #00aaff;
 }
 
+#dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    z-index: 1000; /* Ensure it stays on top */
+}
+
 main {
     margin-top: 100px; /* Adjust based on the header height */
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Add gap between sections */
-}
-
-h2, p, ul {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adjust shadow as needed */
-}
-
-ul {
-    list-style: none; /* Remove default list styling */
-    padding: 0;
-}
-
-ul li {
-    margin-bottom: 1em;
-}
-
-.text-container {
-    background: rgba(255, 255, 255, 0.8); /* Adjust opacity and color as needed */
-    padding: 1em;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.section-overlay {
-    position: relative;
-    z-index: 1;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
-    padding: 2em 0;
-}
-
-.section-overlay .container {
-    position: relative;
-    z-index: 2;
-    color: #fff; /* Ensure text is white for better visibility */
-}
-
-.parallax::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-    z-index: 1;
-}
-
-.section-content {
-    position: relative;
-    z-index: 2;
+    gap: 40px; /* Add gap between sections */
 }
 
 .container {
@@ -126,29 +83,6 @@ section {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: relative;
     overflow: hidden; /* Ensure content stays within the section */
-    min-height: 100vh; /* Ensure each section has a minimum height */
-}
-
-/* Adjusting parallax effect and background size for smaller screens */
-@media (max-width: 768px) {
-    .parallax {
-        background-attachment: scroll;
-        background-size: cover;
-        min-height: 50vh; /* Adjust as needed */
-    }
-
-    main {
-        margin-top: 60px; /* Adjust based on the header height */
-    }
-
-    .header nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .header nav ul li {
-        margin: 5px 0;
-    }
 }
 
 .parallax {
@@ -156,13 +90,6 @@ section {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 100vh;
-}
-
-@keyframes backgroundAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
 
 #home.parallax {
@@ -284,7 +211,7 @@ section {
 }
 
 .timeline-panel {
-    width: 100%;
+    width: 45%;
     border: 1px solid #d4d4d4;
     background: #fff;
     padding: 1em;
@@ -295,47 +222,6 @@ section {
     overflow: hidden; /* Ensure content stays within the panel */
 }
 
-.timeline-panel::before {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 26px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-}
-
-.timeline-item.left .timeline-panel, .timeline-item.right .timeline-panel {
-    float: none;
-    margin: 0;
-    padding: 1em 0;
-}
-
-.timeline-panel::before {
-    display: none;
-}
-
-.timeline-item.left .timeline-panel::before {
-    right: -15px;
-    border-width: 15px 0 15px 15px;
-    border-color: transparent transparent transparent #d4d4d4;
-}
-
-.timeline-item.right .timeline-panel::before {
-    left: -15px;
-    border-width: 15px 15px 15px 0;
-    border-color: transparent #d4d4d4 transparent transparent;
-}
-
-.timeline-panel:hover {
-    background: #f0f0f0;
-    transform: scale(1.02);
-}
-
-.timeline-panel:hover .timeline-details {
-    max-height: 200px; /* Adjust as needed */
-}
-
 .timeline-details {
     max-height: 0;
     overflow: hidden;
@@ -344,6 +230,10 @@ section {
 }
 
 .timeline-panel.active .timeline-details {
+    max-height: 200px; /* Adjust as needed */
+}
+
+.timeline-panel:hover .timeline-details {
     max-height: 200px; /* Adjust as needed */
 }
 
@@ -453,24 +343,12 @@ button:hover, .timeline-panel:hover {
     cursor: pointer;
 }
 
-#dark-mode-toggle {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    z-index: 1000; /* Ensure it stays on top */
-}
-
 body.dark-mode {
     background-color: #333;
     color: #fff;
 }
 
-.sidebar.dark-mode {
+.header.dark-mode {
     background-color: #000;
 }
 
@@ -483,14 +361,12 @@ button.dark-mode, .timeline-panel.dark-mode {
     background: #333;
     color: #fff;
     border: none;
-    padding: 5px 10px;
+    padding: 5px;
+    margin-top: 20px;
     cursor: pointer;
+    display: none; /* Initially hidden */
 }
 
-.collapse-button:hover {
-    background: #00aaff;
-}
-
-.collapsed {
-    display: none;
+.collapse-button.show {
+    display: block;
 }
