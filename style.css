@@ -118,6 +118,46 @@ section {
     background-repeat: no-repeat;
 }
 
+/* Initial positions for the animation */
+.section-hidden-left {
+    transform: translateX(-100%);
+}
+
+.section-hidden-right {
+    transform: translateX(100%);
+}
+
+.section-visible {
+    transform: translateX(0);
+}
+
+/* Animations for sliding in from the left and right */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+.section-visible-left {
+    animation: slideInLeft 0.5s ease-in-out;
+}
+
+.section-visible-right {
+    animation: slideInRight 0.5s ease-in-out;
+}
+
 #home.parallax {
     background-image: url('images/home-bg.jpg');
 }
