@@ -87,6 +87,38 @@ updateSections();
         panel.classList.toggle('active');
     });
 
+const sections = document.querySelectorAll('section');
+
+let currentSection = 0;
+let lastScrollTop = 0;
+
+function updateSections() {
+    sections.forEach((section, index) => {
+        section.classList.remove('section-visible-left', 'section-visible-right', 'section-hidden-left', 'section-hidden-right');
+
+        if (index === currentSection) {
+            section.classList.add(index % 2 === 0 ? 'section-visible-left' : 'section-visible-right');
+        } else {
+            section.classList.add(index % 2 === 0 ? 'section-hidden-left' : 'section-hidden-right');
+        }
+    });
+}
+
+window.addEventListener('wheel', (event) => {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const delta = event.deltaY;
+
+    if (delta > 0 && currentSection < sections.length - 1) {
+        currentSection++;
+    } else if (delta < 0 && currentSection > 0) {
+        currentSection--;
+    }
+
+    updateSections();
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+});
+
+updateSections();
 
     // Check if there's a hash in the URL and scroll to the corresponding section
     if (window.location.hash) {
