@@ -1,9 +1,11 @@
 const sections = document.querySelectorAll('section');
 const timelineItems = document.querySelectorAll('.timeline-item');
+const indicators = document.querySelectorAll('.scroll-indicator div');
 const modal = document.getElementById("myModal");
 const span = document.getElementsByClassName("close")[0];
 
 let currentSection = 0;
+let isThrottled = false;
 
 function updateSections() {
     sections.forEach((section, index) => {
@@ -27,7 +29,6 @@ function updateTimeline() {
 }
 
 function updateScrollIndicator() {
-    const indicators = document.querySelectorAll('.scroll-indicator div');
     indicators.forEach((indicator, index) => {
         if (index === currentSection) {
             indicator.classList.add('active');
@@ -37,17 +38,28 @@ function updateScrollIndicator() {
     });
 }
 
+function throttle(func, limit) {
+    if (isThrottled) return;
+    isThrottled = true;
+    setTimeout(() => {
+        func();
+        isThrottled = false;
+    }, limit);
+}
+
 window.addEventListener('wheel', (event) => {
-    const delta = event.deltaY;
+    throttle(() => {
+        const delta = event.deltaY;
 
-    if (delta > 0 && currentSection < sections.length - 1) {
-        currentSection++;
-    } else if (delta < 0 && currentSection > 0) {
-        currentSection--;
-    }
+        if (delta > 0 && currentSection < sections.length - 1) {
+            currentSection++;
+        } else if (delta < 0 && currentSection > 0) {
+            currentSection--;
+        }
 
-    updateSections();
-    updateTimeline();
+        updateSections();
+        updateTimeline();
+    }, 1000); // Adjust throttle limit as needed
 });
 
 timelineItems.forEach((item, index) => {
