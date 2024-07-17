@@ -98,27 +98,6 @@ section {
 }
 
 /* Initial positions for the animation */
-.section-hidden {
-    transform: translateX(100%);
-}
-
-.section-left {
-    transform: translateX(-100%);
-}
-
-.section-visible {
-    transform: translateX(0);
-}
-
-/* Maintain the parallax background effect */
-.parallax {
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-/* Initial positions for the animation */
 .section-hidden-left {
     transform: translateX(-100%);
 }
@@ -148,6 +127,13 @@ section {
     to {
         transform: translateX(0);
     }
+}
+/* Maintain the parallax background effect */
+.parallax {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .section-visible-left {
