@@ -368,13 +368,7 @@ section {
     background-color: rgba(0,0,0,0.4);
 }
 
-.modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-Continuing with the combined `style.css` code:
 
-```css
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
