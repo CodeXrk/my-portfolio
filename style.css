@@ -13,19 +13,6 @@ body {
     cursor: url('images/custom-cursor.png'), auto;
 }
 
-h2, p, ul {
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adjust shadow as needed */
-}
-
-ul {
-    list-style: none; /* Remove default list styling */
-    padding: 0;
-}
-
-ul li {
-    margin-bottom: 1em;
-}
-
 /* Header */
 .header {
     background-color: #333;
@@ -385,6 +372,13 @@ section {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
+Continuing with the combined `style.css` code:
+
+```css
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
     border: 1px solid #888;
     width: 80%;
 }
@@ -454,4 +448,3 @@ button.dark-mode, .timeline-panel.dark-mode {
 .3d-element:hover {
     transform: rotateY(0deg);
 }
-
