@@ -1,3 +1,8 @@
+/* General Styles */
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -5,8 +10,23 @@ body {
     line-height: 1.6;
     background-color: #f4f4f4;
     color: #333;
+    cursor: url('images/custom-cursor.png'), auto;
 }
 
+h2, p, ul {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Adjust shadow as needed */
+}
+
+ul {
+    list-style: none; /* Remove default list styling */
+    padding: 0;
+}
+
+ul li {
+    margin-bottom: 1em;
+}
+
+/* Header */
 .header {
     background-color: #333;
     color: #fff;
@@ -49,6 +69,7 @@ body {
     color: #00aaff;
 }
 
+/* Dark Mode Toggle */
 #dark-mode-toggle {
     position: fixed;
     top: 20px;
@@ -61,6 +82,7 @@ body {
     z-index: 1000; /* Ensure it stays on top */
 }
 
+/* Main Content */
 main {
     margin-top: 100px; /* Adjust based on the header height */
     padding: 20px;
@@ -75,16 +97,36 @@ main {
     overflow: hidden;
 }
 
-section {
-    padding: 2em 0;
-    background: rgba(255, 255, 255, 0.9);
-    margin: 2em 0; /* Increased margin for more spacing between sections */
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.section-overlay {
     position: relative;
-    overflow: hidden; /* Ensure content stays within the section */
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as needed */
+    padding: 2em 0;
 }
-/* Ensure each section takes up the full viewport height */
+
+.section-overlay .container {
+    position: relative;
+    z-index: 2;
+    color: #fff; /* Ensure text is white for better visibility */
+}
+
+.parallax::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 1;
+}
+
+.section-content {
+    position: relative;
+    z-index: 2;
+}
+
+/* Section Styles */
 section {
     position: relative;
     width: 100%;
@@ -97,20 +139,15 @@ section {
     transition: transform 0.5s ease-in-out;
 }
 
-/* Initial positions for the animation */
-.section-hidden-left {
-    transform: translateX(-100%);
+.parallax {
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: backgroundAnimation 15s infinite;
 }
 
-.section-hidden-right {
-    transform: translateX(100%);
-}
-
-.section-visible {
-    transform: translateX(0);
-}
-
-/* Animations for sliding in from the left and right */
+/* Animations for Section Transitions */
 @keyframes slideInLeft {
     from {
         transform: translateX(-100%);
@@ -128,12 +165,24 @@ section {
         transform: translateX(0);
     }
 }
-/* Maintain the parallax background effect */
-.parallax {
-    background-attachment: fixed;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+
+@keyframes backgroundAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.section-hidden-left {
+    transform: translateX(-100%);
+}
+
+.section-hidden-right {
+    transform: translateX(100%);
+}
+
+.section-visible {
+    transform: translateX(0);
+    transition: transform 0.5s ease-in-out;
 }
 
 .section-visible-left {
@@ -144,38 +193,7 @@ section {
     animation: slideInRight 0.5s ease-in-out;
 }
 
-#home.parallax {
-    background-image: url('images/home-bg.jpg');
-}
-
-#about.parallax {
-    background-image: url('images/about-bg.jpg');
-}
-
-#education.parallax {
-    background-image: url('images/education-bg.jpg');
-}
-
-#certifications.parallax {
-    background-image: url('images/certifications-bg.jpg');
-}
-
-#projects.parallax {
-    background-image: url('images/projects-bg.jpg');
-}
-
-#skills.parallax {
-    background-image: url('images/skills-bg.jpg');
-}
-
-#experience.parallax {
-    background-image: url('images/experience-bg.jpg');
-}
-
-#contact.parallax {
-    background-image: url('images/contact-bg.jpg');
-}
-
+/* Skills Section */
 .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -215,6 +233,7 @@ section {
     transition: width 0.3s ease;
 }
 
+/* Timeline */
 .timeline {
     position: relative;
     padding: 1em 0;
@@ -244,7 +263,7 @@ section {
 }
 
 .timeline-item {
-    margin: 0 0 2em 0;
+    cursor: pointer;
     position: relative;
 }
 
@@ -281,14 +300,12 @@ section {
     white-space: normal;
 }
 
-.timeline-panel.active .timeline-details {
-    max-height: 200px; /* Adjust as needed */
-}
-
+.timeline-panel.active .timeline-details,
 .timeline-panel:hover .timeline-details {
     max-height: 200px; /* Adjust as needed */
 }
 
+/* Animated Text */
 .animated-text {
     font-family: monospace;
     border-right: 0.15em solid black;
@@ -307,6 +324,7 @@ section {
     50% { border-color: black; }
 }
 
+/* Scroll Indicator */
 .scroll-indicator {
     position: fixed;
     bottom: 20px;
@@ -329,18 +347,7 @@ section {
     background: #00aaff;
 }
 
-button:hover {
-    background: #00aaff;
-}
-
-button {
-    cursor: url('images/custom-cursor.png'), auto;
-}
-
-button:hover, .timeline-panel:hover {
-    cursor: url('images/custom-cursor-hover.png'), auto;
-}
-
+/* Loading Spinner */
 .loading-spinner {
     display: none; /* Initially hidden */
     position: fixed;
@@ -360,6 +367,7 @@ button:hover, .timeline-panel:hover {
     100% { transform: rotate(360deg); }
 }
 
+/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -395,6 +403,7 @@ button:hover, .timeline-panel:hover {
     cursor: pointer;
 }
 
+/* Dark Mode */
 body.dark-mode {
     background-color: #333;
     color: #fff;
@@ -407,6 +416,11 @@ body.dark-mode {
 button.dark-mode, .timeline-panel.dark-mode {
     background: #555;
     color: #fff;
+}
+
+/* Collapsible Sections */
+.collapse-section {
+    margin-bottom: 20px;
 }
 
 .collapse-button {
@@ -422,3 +436,22 @@ button.dark-mode, .timeline-panel.dark-mode {
 .collapse-button.show {
     display: block;
 }
+
+.collapsible-content {
+    display: none;
+}
+
+.collapse-section.active .collapsible-content {
+    display: block;
+}
+
+/* 3D Elements */
+.3d-element {
+    transform: rotateY(20deg);
+    transition: transform 0.5s ease;
+}
+
+.3d-element:hover {
+    transform: rotateY(0deg);
+}
+
