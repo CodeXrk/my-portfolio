@@ -47,7 +47,7 @@ function throttle(func, limit) {
     }, limit);
 }
 
-window.addEventListener('wheel', (event) => {
+function handleScroll(event) {
     throttle(() => {
         const delta = event.deltaY;
 
@@ -59,8 +59,10 @@ window.addEventListener('wheel', (event) => {
 
         updateSections();
         updateTimeline();
-    }, 700); // Adjust throttle limit for desired scroll speed
-});
+    }, 400); // Adjust throttle limit for desired scroll speed
+}
+
+window.addEventListener('wheel', handleScroll);
 
 timelineItems.forEach((item, index) => {
     item.addEventListener('click', () => {
