@@ -59,7 +59,7 @@ window.addEventListener('wheel', (event) => {
 
         updateSections();
         updateTimeline();
-    }, 1000); // Adjust throttle limit as needed
+    }, 700); // Adjust throttle limit for desired scroll speed
 });
 
 timelineItems.forEach((item, index) => {
