@@ -1,148 +1,135 @@
-const sections = document.querySelectorAll('section');
-const timelineItems = document.querySelectorAll('.timeline-item');
-const indicators = document.querySelectorAll('.scroll-indicator div');
-const modal = document.getElementById("myModal");
-const span = document.getElementsByClassName("close")[0];
+document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const indicators = document.querySelectorAll('.scroll-indicator div');
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const loadingSpinner = document.getElementById('loading-spinner');
 
-let currentSection = 0;
-let isThrottled = false;
+    let currentSection = 0;
+    let isThrottled = false;
 
-function updateSections() {
-    sections.forEach((section, index) => {
-        section.classList.remove('section-visible-left', 'section-visible-right', 'section-hidden-left', 'section-hidden-right');
-        
-        if (index === currentSection) {
-            section.classList.add(index % 2 === 0 ? 'section-visible-left' : 'section-visible-right');
-        } else if (index < currentSection) {
-            section.classList.add(index % 2 === 0 ? 'section-hidden-left' : 'section-hidden-right');
-        } else {
-            section.classList.add(index % 2 === 0 ? 'section-hidden-right' : 'section-hidden-left');
-        }
+    // Show loading spinner
+    loadingSpinner.style.display = 'block';
+
+    // Hide loading spinner when page is loaded
+    window.addEventListener('load', () => {
+        loadingSpinner.style.display = 'none';
     });
-    updateScrollIndicator();
-}
 
-function updateTimeline() {
-    timelineItems.forEach((item, index) => {
-        item.classList.toggle('active', index === currentSection);
-    });
-}
-
-function updateScrollIndicator() {
-    indicators.forEach((indicator, index) => {
-        if (index === currentSection) {
-            indicator.classList.add('active');
-        } else {
-            indicator.classList.remove('active');
-        }
-    });
-}
-
-function throttle(func, limit) {
-    if (isThrottled) return;
-    isThrottled = true;
-    setTimeout(() => {
-        func();
-        isThrottled = false;
-    }, limit);
-}
-
-function handleScroll(event) {
-    throttle(() => {
-        const delta = event.deltaY;
-
-        if (delta > 0 && currentSection < sections.length - 1) {
-            currentSection++;
-        } else if (delta < 0 && currentSection > 0) {
-            currentSection--;
-        }
-
-        updateSections();
-        updateTimeline();
-    }, 400); // Adjust throttle limit for desired scroll speed
-}
-
-window.addEventListener('wheel', handleScroll);
-
-timelineItems.forEach((item, index) => {
-    item.addEventListener('click', () => {
-        currentSection = index;
-        updateSections();
-        updateTimeline();
-        modal.style.display = "block";
-        // Add content dynamically based on the item clicked
-    });
-});
-
-span.onclick = function() {
-    modal.style.display = "none";
-}
-
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    function updateActiveSection() {
+        sections.forEach((section, index) => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= 100 && rect.bottom >= 100) {
+                currentSection = index;
+                updateNavigation();
+                updateScrollIndicator();
+            }
+        });
     }
-}
 
-document.querySelectorAll('.collapse-button').forEach(button => {
-    button.addEventListener('click', () => {
-        button.parentElement.classList.toggle('active');
+    function updateNavigation() {
+        navLinks.forEach((link, index) => {
+            if (index === currentSection) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+
+    function updateScrollIndicator() {
+        indicators.forEach((indicator, index) => {
+            if (index === currentSection) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+    }
+
+    function smoothScroll(target) {
+        const targetSection = document.querySelector(target);
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Smooth scrolling for navigation links
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = e.target.getAttribute('href');
+            smoothScroll(target);
+        });
     });
-});
 
-updateSections();
-updateTimeline();
-updateScrollIndicator();
-
-// Dark Mode Toggle
-const darkModeToggle = document.getElementById('dark-mode-toggle');
-darkModeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    document.querySelector('.header').classList.toggle('dark-mode');
-    document.querySelectorAll('.timeline-panel').forEach(panel => {
-        panel.classList.toggle('dark-mode');
+    // Scroll event listener
+    window.addEventListener('scroll', () => {
+        if (!isThrottled) {
+            window.requestAnimationFrame(() => {
+                updateActiveSection();
+                isThrottled = false;
+            });
+            isThrottled = true;
+        }
     });
-});
 
-// Interactive Chart
-const ctx = document.getElementById('myChart').getContext('2d');
-const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            y: {
-                beginAtZero: true
+    // Dark Mode Toggle
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const icon = darkModeToggle.querySelector('i');
+        icon.classList.toggle('fa-moon');
+        icon.classList.toggle('fa-sun');
+    });
+
+    // Initialize map
+    const map = L.map('map').setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Initialize chart
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['CAD Modeling', 'Problem Solving', 'Critical Thinking', 'Communication', 'Programming', 'Project Management'],
+            datasets: [{
+                label: 'Skills',
+                data: [90, 85, 80, 75, 70, 80],
+                backgroundColor: 'rgba(0, 170, 255, 0.2)',
+                borderColor: 'rgba(0, 170, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                r: {
+                    angleLines: {
+                        display: false
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                }
             }
         }
-    }
-});
+    });
 
-// Interactive Map
-const map = L.map('map').setView([51.505, -0.09], 13);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+    // Add scroll-triggered animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});
