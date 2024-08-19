@@ -114,6 +114,73 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Custom Cursor
+    const cursor = document.createElement('div');
+    cursor.classList.add('custom-cursor');
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    document.addEventListener('mousedown', () => cursor.classList.add('active'));
+    document.addEventListener('mouseup', () => cursor.classList.remove('active'));
+
+    document.querySelectorAll('a, button, .project-card, .timeline-item').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+    });
+
+    // Project Modal
+    const modal = document.getElementById('project-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const closeBtn = document.getElementsByClassName('close')[0];
+
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', () => {
+            modalTitle.textContent = card.querySelector('h3').textContent;
+            modalDescription.textContent = card.querySelector('p').textContent;
+            modal.style.display = 'block';
+        });
+    });
+
+    closeBtn.onclick = () => modal.style.display = 'none';
+    window.onclick = (event) => {
+        if (event.target == modal) modal.style.display = 'none';
+    };
+
+    // Collapsible Timeline
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('active');
+        });
+    });
+
+    // Parallax Background
+    const parallaxBg = document.createElement('div');
+    parallaxBg.classList.add('parallax-bg');
+    document.body.insertBefore(parallaxBg, document.body.firstChild);
+
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.pageYOffset;
+        parallaxBg.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+    });
+
+    // Animated SVG Icons (using GSAP)
+    gsap.from('.skill i', {
+        duration: 1,
+        opacity: 0,
+        y: 50,
+        stagger: 0.2,
+        scrollTrigger: {
+            trigger: '#skills',
+            start: 'top 80%',
+        },
+    });
+});
+
     // Add scroll-triggered animations
     const observerOptions = {
         root: null,
