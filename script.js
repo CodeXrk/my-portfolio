@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const loadingSpinner = document.getElementById('loading-spinner');
 
+    let currentSection = 0;
+    let isThrottled = false;
+
     // Show loading spinner
     loadingSpinner.style.display = 'block';
 
@@ -14,34 +17,60 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function updateActiveSection() {
-        const scrollPosition = window.pageYOffset;
-
         sections.forEach((section, index) => {
-            const sectionTop = section.offsetTop - 100;
-            const sectionBottom = sectionTop + section.offsetHeight;
-
-            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
-                navLinks.forEach(link => link.classList.remove('active'));
-                indicators.forEach(indicator => indicator.classList.remove('active'));
-                
-                navLinks[index].classList.add('active');
-                indicators[index].classList.add('active');
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= 100 && rect.bottom >= 100) {
+                currentSection = index;
+                updateNavigation();
+                updateScrollIndicator();
             }
         });
+    }
+
+    function updateNavigation() {
+        navLinks.forEach((link, index) => {
+            if (index === currentSection) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+
+    function updateScrollIndicator() {
+        indicators.forEach((indicator, index) => {
+            if (index === currentSection) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+    }
+
+    function smoothScroll(target) {
+        const targetSection = document.querySelector(target);
+        targetSection.scrollIntoView({ behavior: 'smooth' });
     }
 
     // Smooth scrolling for navigation links
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            const targetId = link.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            targetSection.scrollIntoView({ behavior: 'smooth' });
+            const target = e.target.getAttribute('href');
+            smoothScroll(target);
         });
     });
 
     // Scroll event listener
-    window.addEventListener('scroll', updateActiveSection);
+    window.addEventListener('scroll', () => {
+        if (!isThrottled) {
+            window.requestAnimationFrame(() => {
+                updateActiveSection();
+                isThrottled = false;
+            });
+            isThrottled = true;
+        }
+    });
 
     // Dark Mode Toggle
     darkModeToggle.addEventListener('click', () => {
@@ -85,29 +114,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Project Modal
-    const modal = document.getElementById('project-modal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalDescription = document.getElementById('modal-description');
-    const closeBtn = document.getElementsByClassName('close')[0];
-
-    document.querySelectorAll('.project-card').forEach(card => {
-        card.addEventListener('click', () => {
-            modalTitle.textContent = card.querySelector('h3').textContent;
-            modalDescription.textContent = card.querySelector('p').textContent;
-            modal.style.display = 'block';
-        });
-    });
-
-    closeBtn.onclick = () => modal.style.display = 'none';
-    window.onclick = (event) => {
-        if (event.target == modal) modal.style.display = 'none';
+    // Add scroll-triggered animations
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
     };
 
-    // Collapsible Timeline
-    document.querySelectorAll('.timeline-item').forEach(item => {
-        item.addEventListener('click', () => {
-            item.classList.toggle('active');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in-view');
+            }
         });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
     });
 });
