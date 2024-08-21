@@ -5,9 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const loadingSpinner = document.getElementById('loading-spinner');
 
-    let currentSection = 0;
-    let isThrottled = false;
-
     // Show loading spinner
     loadingSpinner.style.display = 'block';
 
@@ -17,60 +14,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function updateActiveSection() {
+        const scrollPosition = window.pageYOffset;
+
         sections.forEach((section, index) => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top <= 100 && rect.bottom >= 100) {
-                currentSection = index;
-                updateNavigation();
-                updateScrollIndicator();
+            const sectionTop = section.offsetTop - 100;
+            const sectionBottom = sectionTop + section.offsetHeight;
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                indicators.forEach(indicator => indicator.classList.remove('active'));
+                
+                navLinks[index].classList.add('active');
+                indicators[index].classList.add('active');
             }
         });
-    }
-
-    function updateNavigation() {
-        navLinks.forEach((link, index) => {
-            if (index === currentSection) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-        });
-    }
-
-    function updateScrollIndicator() {
-        indicators.forEach((indicator, index) => {
-            if (index === currentSection) {
-                indicator.classList.add('active');
-            } else {
-                indicator.classList.remove('active');
-            }
-        });
-    }
-
-    function smoothScroll(target) {
-        const targetSection = document.querySelector(target);
-        targetSection.scrollIntoView({ behavior: 'smooth' });
     }
 
     // Smooth scrolling for navigation links
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            const target = e.target.getAttribute('href');
-            smoothScroll(target);
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            targetSection.scrollIntoView({ behavior: 'smooth' });
         });
     });
 
     // Scroll event listener
-    window.addEventListener('scroll', () => {
-        if (!isThrottled) {
-            window.requestAnimationFrame(() => {
-                updateActiveSection();
-                isThrottled = false;
-            });
-            isThrottled = true;
-        }
-    });
+    window.addEventListener('scroll', updateActiveSection);
 
     // Dark Mode Toggle
     darkModeToggle.addEventListener('click', () => {
@@ -114,24 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Custom Cursor
-    const cursor = document.createElement('div');
-    cursor.classList.add('custom-cursor');
-    document.body.appendChild(cursor);
-
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    });
-
-    document.addEventListener('mousedown', () => cursor.classList.add('active'));
-    document.addEventListener('mouseup', () => cursor.classList.remove('active'));
-
-    document.querySelectorAll('a, button, .project-card, .timeline-item').forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
-
     // Project Modal
     const modal = document.getElementById('project-modal');
     const modalTitle = document.getElementById('modal-title');
@@ -156,47 +109,5 @@ document.addEventListener('DOMContentLoaded', () => {
         item.addEventListener('click', () => {
             item.classList.toggle('active');
         });
-    });
-
-    // Parallax Background
-    const parallaxBg = document.createElement('div');
-    parallaxBg.classList.add('parallax-bg');
-    document.body.insertBefore(parallaxBg, document.body.firstChild);
-
-    window.addEventListener('scroll', () => {
-        const scrollPosition = window.pageYOffset;
-        parallaxBg.style.transform = `translateY(${scrollPosition * 0.5}px)`;
-    });
-
-    // Animated SVG Icons (using GSAP)
-    gsap.from('.skill i', {
-        duration: 1,
-        opacity: 0,
-        y: 50,
-        stagger: 0.2,
-        scrollTrigger: {
-            trigger: '#skills',
-            start: 'top 80%',
-        },
-    });
-});
-
-    // Add scroll-triggered animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-            }
-        });
-    }, observerOptions);
-
-    sections.forEach(section => {
-        observer.observe(section);
     });
 });
