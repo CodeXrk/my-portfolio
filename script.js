@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const indicators = document.querySelectorAll('.scroll-indicator div');
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const loadingSpinner = document.getElementById('loading-spinner');
+    const modal = document.getElementById('modal');
+    const modalContent = document.getElementById('modal-content');
+    const closeModal = document.getElementsByClassName('close')[0];
 
     let currentSection = 0;
     let isThrottled = false;
@@ -16,6 +19,28 @@ document.addEventListener('DOMContentLoaded', () => {
         loadingSpinner.style.display = 'none';
     });
 
+    function openModal(content) {
+        modalContent.innerHTML = content;
+        modal.style.display = "block";
+    }
+    
+    closeModal.onclick = function() {
+        modal.style.display = "none";
+    }
+    
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    
+    document.querySelectorAll('.project-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const content = card.innerHTML;
+            openModal(content);
+        });
+    });
+
     function updateActiveSection() {
         sections.forEach((section, index) => {
             const rect = section.getBoundingClientRect();
@@ -26,6 +51,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Scroll-triggered animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section').forEach(section => {
+    observer.observe(section);
+});
 
     function updateNavigation() {
         navLinks.forEach((link, index) => {
@@ -72,6 +120,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    window.addEventListener('scroll', () => {
+        const parallaxElements = document.querySelectorAll('.parallax');
+        parallaxElements.forEach(element => {
+            const speed = element.dataset.speed || 0.5;
+            const yPos = -(window.pageYOffset * speed);
+            element.style.backgroundPositionY = `${yPos}px`;
+        });
+    });
+
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        item.addEventListener('click', () => {
+            item.classList.toggle('expanded');
+        });
+    });
+
     // Dark Mode Toggle
     darkModeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
@@ -85,6 +148,19 @@ document.addEventListener('DOMContentLoaded', () => {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+
+    const experiences = [
+        { name: "The Australian National University", lat: -35.2777, lon: 149.1185 },
+        { name: "Uniqlo", lat: -35.2809, lon: 149.1300 },
+        { name: "Under Armour", lat: -35.2819, lon: 149.1289 },
+        { name: "VMix Mineral Technologies Pvt Ltd.", lat: 28.6139, lon: 77.2090 }
+    ];
+    
+    experiences.forEach(exp => {
+        L.marker([exp.lat, exp.lon]).addTo(map)
+            .bindPopup(exp.name)
+            .openPopup();
+    });
 
     // Initialize chart
     const ctx = document.getElementById('myChart').getContext('2d');
