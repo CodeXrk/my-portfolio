@@ -171,27 +171,6 @@ main {
     z-index: 9999;
 }
 
-/* Custom Cursor */
-body {
-    cursor: none;
-}
-
-.custom-cursor {
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--primary-color);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    transition: width 0.3s, height 0.3s, background-color 0.3s;
-    z-index: 9999;
-}
-
-.custom-cursor.hover {
-    width: 30px;
-    height: 30px;
-    background-color: rgba(0, 170, 255, 0.2);
-}
 
 /* Project Cards Hover Effect */
 .project-card {
