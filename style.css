@@ -82,10 +82,13 @@ body, .header, .project-card, .skill, .timeline-item {
 main {
     margin-top: 80px;
     padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
 }
 
 .section {
     min-height: 100vh;
+    padding: 40px 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,6 +100,12 @@ main {
 .section.animate {
     opacity: 1;
     transform: translateY(0);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 .container {
