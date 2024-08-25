@@ -3,123 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rudransh Katiyar - Mechanical Engineer Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <title>Rudransh Katiyar - Portfolio</title>
+    <meta name="description" content="Portfolio of Rudransh Katiyar, Graduate Mechanical Engineer">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 <body>
-    <div id="cursor"></div>
-    <header>
+    <div id="loading-spinner" class="loading-spinner"></div>
+
+    <header class="header">
+        <h1>Rudransh Katiyar</h1>
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About Me</a></li>
+                <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
-        <button id="night-mode-toggle">
-            <i class="fas fa-moon"></i>
-        </button>
     </header>
 
-    <div id="pulley-indicator"></div>
+    <button id="dark-mode-toggle" aria-label="Toggle Dark Mode">
+        <i class="fas fa-moon"></i>
+    </button>
 
     <main>
-        <section id="home" class="parallax">
-            <div class="content">
-                <h1>Rudransh Katiyar</h1>
-                <h2>Mechanical Engineer</h2>
-                <p>Innovating the future through engineering excellence</p>
+        <section id="home" class="parallax section" data-speed="0.5">
+            <div class="container">
+                <h2 class="animated-text">Welcome to My Portfolio</h2>
+                <!-- Home content -->
             </div>
         </section>
 
-        <section id="about" class="parallax">
-            <div class="content">
+        <section id="about" class="parallax section" data-speed="0.3">
+            <div class="container">
                 <h2>About Me</h2>
-                <p>Passionate mechanical engineer with a keen interest in sustainable design and advanced manufacturing techniques.</p>
+                <!-- About content -->
             </div>
         </section>
 
-        <section id="education" class="parallax">
-            <div class="content">
+        <section id="education" class="parallax section" data-speed="0.4">
+            <div class="container">
                 <h2>Education</h2>
-                <div class="education-item">
-                    <h3>Bachelor of Engineering in Mechanical Engineering</h3>
-                    <p>The Australian National University, 2020-2024</p>
+                <!-- Education content -->
+            </div>
+        </section>
+
+        <section id="certifications" class="parallax section" data-speed="0.2">
+            <div class="container">
+                <h2>Certifications</h2>
+                <!-- Certifications content -->
+            </div>
+        </section>
+
+        <section id="projects" class="parallax section" data-speed="0.3">
+            <div class="container">
+                <h2>Projects</h2>
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h3>Australian Waste Management for Metals</h3>
+                        <p>Led a project focused on developing sustainable waste management solutions for metal recycling in Australia.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>Knee Clamp Robotics</h3>
+                        <p>Designed and developed a robotic knee clamp system aimed at assisting in medical procedures.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>App Development (unbranded.in)</h3>
+                        <p>Worked on the development of an innovative mobile application for unbranded, high-quality products.</p>
+                    </div>
+                    <div class="project-card">
+                        <h3>CAD Projects</h3>
+                        <p>Engaged in multiple CAD projects including FSAE car chassis design, V6 engine modeling, and more.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="skills" class="parallax">
-            <div class="content">
+        <section id="skills" class="parallax section" data-speed="0.4">
+            <div class="container">
                 <h2>Skills</h2>
-                <ul class="skills-list">
-                    <li>CAD/CAM</li>
-                    <li>3D Printing</li>
-                    <li>Finite Element Analysis</li>
-                    <li>Project Management</li>
-                    <li>SOLIDWORKS</li>
-                    <li>AutoCAD</li>
-                </ul>
+                <canvas id="skillsChart" width="400" height="400"></canvas>
             </div>
         </section>
 
-        <section id="projects" class="parallax">
-            <h2>Projects</h2>
-            <div class="project-container">
-                <div class="project-item">
-                    <div class="project-info">
-                        <h3>Sustainable Waste Management System</h3>
-                        <p>Designed an innovative waste sorting and recycling system for urban environments.</p>
-                    </div>
-                    <div class="project-image">
-                        <img src="path_to_project_image1.jpg" alt="Waste Management System">
-                    </div>
+        <section id="experience" class="parallax section" data-speed="0.3">
+            <div class="container">
+                <h2>Experience</h2>
+                <div class="timeline">
+                    <!-- Experience timeline items -->
                 </div>
-                <!-- Add more project items here -->
             </div>
         </section>
 
-        <section id="experience" class="parallax">
-            <h2>Work Experience</h2>
-            <div class="experience-container">
-                <div class="experience-item">
-                    <div class="experience-info">
-                        <h3>Mechanical Design Intern</h3>
-                        <p>XYZ Engineering, Summer 2023</p>
-                        <ul>
-                            <li>Assisted in the design of automotive components using SOLIDWORKS</li>
-                            <li>Participated in team meetings and contributed to project planning</li>
-                        </ul>
-                    </div>
-                    <div class="experience-image">
-                        <img src="path_to_experience_image1.jpg" alt="XYZ Engineering Internship">
-                    </div>
-                </div>
-                <!-- Add more experience items here -->
+        <section id="contact" class="parallax section" data-speed="0.2">
+            <div class="container">
+                <h2>Contact</h2>
+                <!-- Contact content -->
             </div>
         </section>
 
-        <section id="contact" class="parallax">
-            <div class="content">
-                <h2>Contact Me</h2>
-                <form id="contact-form">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
+        <section id="map-section" class="parallax section" data-speed="0.1">
+            <div class="container">
+                <h2>My Journey</h2>
+                <div id="map" style="height: 400px;"></div>
             </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Rudransh Katiyar. All rights reserved.</p>
-    </footer>
+    <div class="scroll-indicator">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modal-content"></div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
