@@ -3,6 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const sections = document.querySelectorAll('.parallax-section');
     const pulleyRope = document.querySelector('.pulley-rope');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const loadingSpinner = document.getElementById('loading-spinner');
+
+    let currentSection = 0;
+    let isThrottled = false;
+
+    // Show loading spinner
+    loadingSpinner.style.display = 'block';
+
+    // Hide loading spinner when page is loaded
+    window.addEventListener('load', () => {
+        loadingSpinner.style.display = 'none';
+    });
 
     // Custom Cursor
     document.addEventListener('mousemove', (e) => {
@@ -26,7 +39,37 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.to('.pulley-wheel', { y: wheelPosition, duration: 0.3 });
     }
 
-    window.addEventListener('scroll', updatePulley);
+    window.addEventListener('scroll', () => {
+        if (!isThrottled) {
+            window.requestAnimationFrame(() => {
+                updatePulley();
+                updateActiveSection();
+                isThrottled = false;
+            });
+            isThrottled = true;
+        }
+    });
+
+    // Update active section
+    function updateActiveSection() {
+        sections.forEach((section, index) => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= 100 && rect.bottom >= 100) {
+                currentSection = index;
+                updateNavigation();
+            }
+        });
+    }
+
+    function updateNavigation() {
+        navLinks.forEach((link, index) => {
+            if (index === currentSection) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
 
     // Parallax Effect
     sections.forEach((section) => {
@@ -76,12 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Smooth Scrolling
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const target = document.querySelector(e.target.getAttribute('href'));
+            target.scrollIntoView({ behavior: 'smooth' });
         });
     });
 
@@ -117,6 +159,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 start: 'top 80%'
             }
         });
+    });
+
+    // Initialize map
+    const map = L.map('map').setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Initialize chart
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ['CAD Modeling', 'Problem Solving', 'Critical Thinking', 'Communication', 'Programming', 'Project Management'],
+            datasets: [{
+                label: 'Skills',
+                data: [90, 85, 80, 85, 75, 80],
+                backgroundColor: 'rgba(0, 170, 255, 0.2)',
+                borderColor: 'rgba(0, 170, 255, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                r: {
+                    angleLines: {
+                        display: false
+                    },
+                    suggestedMin: 0,
+                    suggestedMax: 100
+                }
+            }
+        }
     });
 
     // Initialize animations
