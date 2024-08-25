@@ -7,12 +7,26 @@
     --header-text: #ecf0f1;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     transition: background-color 0.3s ease, color 0.3s ease;
     cursor: none;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --bg-color: #333;
+    --text-color: #fff;
+    --header-bg: #000;
 }
 
 /* Custom Cursor */
@@ -25,6 +39,54 @@ body {
     pointer-events: none;
     z-index: 9999;
     transition: transform 0.1s ease;
+}
+
+/* Header */
+.header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.header nav ul {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.header nav ul li {
+    margin: 0 10px;
+}
+
+.header nav ul li a {
+    color: var(--header-text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.header nav ul li a:hover,
+.header nav ul li a.active {
+    color: var(--primary-color);
+}
+
+/* Dark Mode Toggle */
+#dark-mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.5em;
+    cursor: pointer;
+    z-index: 1001;
 }
 
 /* Pulley Indicator */
@@ -57,6 +119,18 @@ body {
     left: 13px;
 }
 
+/* Main Content */
+main {
+    margin-top: 80px;
+    padding: 20px;
+}
+
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: auto;
+}
+
 /* Parallax Sections */
 .parallax-section {
     min-height: 100vh;
@@ -65,6 +139,14 @@ body {
     justify-content: center;
     position: relative;
     overflow: hidden;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.parallax-section.in-view {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .parallax-section::before {
@@ -80,6 +162,27 @@ body {
     background-size: cover;
     opacity: 0.1;
     z-index: -1;
+}
+
+/* Animated Text */
+.animated-text {
+    font-family: monospace;
+    overflow: hidden;
+    border-right: 0.15em solid var(--primary-color);
+    white-space: nowrap;
+    margin: 0 auto;
+    letter-spacing: 0.15em;
+    animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--primary-color) }
 }
 
 /* Project and Experience Sliders */
@@ -126,15 +229,83 @@ body {
     gap: 1rem;
 }
 
-/* Dark Mode */
-body.dark-mode {
-    --bg-color: #2c3e50;
-    --text-color: #ecf0f1;
-    --header-bg: #34495e;
+.skill {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.skill-bar {
+    height: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.skill-level {
+    height: 100%;
+    background-color: var(--primary-color);
+    width: 0;
+}
+
+/* Contact Section */
+.contact-info {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contact-info li {
+    margin-bottom: 10px;
+}
+
+.contact-info i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+/* Map and Chart Sections */
+#map, #myChart {
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    z-index: 9999;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header nav ul li {
+        margin: 10px 0;
+    }
+
+    .container {
+        width: 90%;
+    }
+
     .project-item,
     .experience-item {
         flex-direction: column;
