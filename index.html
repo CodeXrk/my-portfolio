@@ -7,12 +7,16 @@
     <meta name="description" content="Portfolio of Rudransh Katiyar, Graduate Mechanical Engineer">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <div id="custom-cursor"></div>
-    
+    <div id="loading-spinner" class="loading-spinner"></div>
+
     <header class="header">
         <h1>Rudransh Katiyar</h1>
         <nav>
@@ -20,9 +24,10 @@
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#about" class="nav-link">About Me</a></li>
                 <li><a href="#education" class="nav-link">Education</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
         </nav>
@@ -48,7 +53,8 @@
         <section id="about" class="parallax-section">
             <div class="container">
                 <h2>About Me</h2>
-                <p>Dedicated and adaptable Graduate Mechanical Engineer with a focus on CAD modeling, finite element analysis, and innovative problem-solving.</p>
+                <p>I am a dedicated and adaptable Graduate Mechanical Engineer with a passion for sustainable practices and innovative solutions. My journey in mechanical engineering has equipped me with a solid foundation in CAD modeling, finite element analysis, and hands-on problem-solving. I thrive in collaborative environments and am always eager to take on new challenges.</p>
+                <p>With a strong work ethic and exceptional interpersonal skills, I have consistently delivered detailed-oriented work in both academic and professional settings. My goal is to contribute to organizations that are committed to a sustainable future, innovation, and research activities.</p>
             </div>
         </section>
 
@@ -58,6 +64,35 @@
                 <h3>The Australian National University</h3>
                 <p><strong>Bachelor of Engineering (Hons): Mechanical Engineering</strong></p>
                 <p><em>Expected graduation: July 2024</em></p>
+                <p>Throughout my academic career, I have focused on developing a strong foundation in mechanical engineering principles and practices. My coursework has included subjects such as:</p>
+                <ul>
+                    <li>Fluid Dynamics</li>
+                    <li>Thermodynamics</li>
+                    <li>Material Science</li>
+                    <li>Control Systems</li>
+                    <li>CAD/CAM Technologies</li>
+                    <li>Robotics and Automation</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="certifications" class="parallax-section">
+            <div class="container">
+                <h2>Certifications</h2>
+                <ul>
+                    <li>
+                        <h3>CSWA (Certified SOLIDWORKS Associate)</h3>
+                        <p>Demonstrates proficiency in 3D CAD modeling using SOLIDWORKS, including part and assembly creation, and drawing generation.</p>
+                    </li>
+                    <li>
+                        <h3>Microsoft Azure</h3>
+                        <p>Certified in cloud computing services and solutions provided by Microsoft Azure, highlighting knowledge in deploying, managing, and monitoring cloud applications.</p>
+                    </li>
+                    <li>
+                        <h3>AutoCAD</h3>
+                        <p>Certified in using AutoCAD for 2D and 3D design, showcasing abilities in drafting, design, and modeling for engineering projects.</p>
+                    </li>
+                </ul>
             </div>
         </section>
 
@@ -68,7 +103,7 @@
                     <div class="project-item">
                         <div class="project-info">
                             <h3>Australian Waste Management for Metals</h3>
-                            <p>Sustainable waste management solutions for metal recycling in Australia.</p>
+                            <p>Led a project focused on developing sustainable waste management solutions for metal recycling in Australia. Conducted extensive research and analysis to identify best practices and innovative technologies for improving metal recycling processes.</p>
                         </div>
                         <div class="project-image">
                             <img src="path/to/waste-management-image.jpg" alt="Waste Management Project">
@@ -77,13 +112,39 @@
                     <div class="project-item">
                         <div class="project-info">
                             <h3>Knee Clamp Robotics</h3>
-                            <p>Robotic knee clamp system for medical procedures.</p>
+                            <p>Designed and developed a robotic knee clamp system aimed at assisting in medical procedures. Utilized CAD modeling and finite element analysis to ensure structural integrity and functionality. Collaborated with a team to prototype and test the system.</p>
                         </div>
                         <div class="project-image">
                             <img src="path/to/knee-clamp-image.jpg" alt="Knee Clamp Robotics">
                         </div>
                     </div>
-                    <!-- Add more project items as needed -->
+                    <div class="project-item">
+                        <div class="project-info">
+                            <h3>App Development (unbranded.in)</h3>
+                            <p>Worked on the development of an innovative mobile application aimed at providing unbranded, high-quality products to consumers. Contributed to the app's design and user interface, ensuring a seamless and user-friendly experience.</p>
+                        </div>
+                        <div class="project-image">
+                            <img src="path/to/app-development-image.jpg" alt="App Development Project">
+                        </div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-info">
+                            <h3>CAD Projects</h3>
+                            <p>Engaged in multiple CAD projects including FSAE car chassis design, V6 engine modeling, robotic arm development, building stress analysis, CubeSat structure design, and Mars rover body creation. These projects highlighted my proficiency in CAD tools and my ability to solve complex engineering problems.</p>
+                        </div>
+                        <div class="project-image">
+                            <img src="path/to/cad-projects-image.jpg" alt="CAD Projects">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="parallax-section">
+            <div class="container">
+                <h2>Skills</h2>
+                <div class="skills-grid">
+                    <!-- Skills will be dynamically added here by JavaScript -->
                 </div>
             </div>
         </section>
@@ -95,8 +156,8 @@
                     <div class="experience-item">
                         <div class="experience-info">
                             <h3>Retail Sales Associate | Uniqlo</h3>
-                            <p>September 2023 - Present</p>
-                            <p>Maintained knowledge of current sales, promotions, and special offers.</p>
+                            <p class="timeline-date">September 2023 - Present</p>
+                            <p>Maintained knowledge of current sales, promotions, and special offers. Managed stockroom organization, including receiving shipments and packing goods.</p>
                         </div>
                         <div class="experience-image">
                             <img src="path/to/uniqlo-image.jpg" alt="Uniqlo Experience">
@@ -104,24 +165,34 @@
                     </div>
                     <div class="experience-item">
                         <div class="experience-info">
+                            <h3>Retail Sales Associate | Under Armour</h3>
+                            <p class="timeline-date">May 2023 - Present</p>
+                            <p>Handled customer complaints professionally to resolve issues quickly and effectively. Operated cash registers accurately to process payments and issue receipts.</p>
+                        </div>
+                        <div class="experience-image">
+                            <img src="path/to/under-armour-image.jpg" alt="Under Armour Experience">
+                        </div>
+                    </div>
+                    <div class="experience-item">
+                        <div class="experience-info">
                             <h3>CAD Designer | ANU Formula Sport</h3>
-                            <p>September 2021 - June 2022</p>
-                            <p>Developed CAD models and drawings for product development.</p>
+                            <p class="timeline-date">September 2021 - June 2022</p>
+                            <p>Developed CAD models and drawings for product development. Collaborated on new designs, chassis manufacturing, and FEA.</p>
                         </div>
                         <div class="experience-image">
                             <img src="path/to/cad-designer-image.jpg" alt="CAD Designer Experience">
                         </div>
                     </div>
-                    <!-- Add more experience items as needed -->
-                </div>
-            </div>
-        </section>
-
-        <section id="skills" class="parallax-section">
-            <div class="container">
-                <h2>Skills</h2>
-                <div class="skills-grid">
-                    <!-- Skill items will be dynamically created with JavaScript -->
+                    <div class="experience-item">
+                        <div class="experience-info">
+                            <h3>Mechanical Engineering Intern | VMix Mineral Technologies Pvt Ltd.</h3>
+                            <p class="timeline-date">March 2021 - June 2021</p>
+                            <p>Developed CAD models to evaluate designs. Improved technical abilities by practical learning and manufacturing. Wrote engineering documentation and tracked supply inventories.</p>
+                        </div>
+                        <div class="experience-image">
+                            <img src="path/to/vmix-image.jpg" alt="VMix Internship Experience">
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -129,12 +200,26 @@
         <section id="contact" class="parallax-section">
             <div class="container">
                 <h2>Contact</h2>
-                <form id="contact-form">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                    <textarea name="message" placeholder="Your Message" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
+                <p>I am always open to connecting with fellow professionals, potential collaborators, and anyone interested in my work. Here are the ways you can get in touch with me:</p>
+                <ul class="contact-info">
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:u7156351@anu.edu.au">u7156351@anu.edu.au</a></li>
+                    <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/rudransh-katiyar" target="_blank">www.linkedin.com/in/rudransh-katiyar</a></li>
+                    <li><i class="fas fa-phone"></i> +61 405264265</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="map-section" class="parallax-section">
+            <div class="container">
+                <h2>My Journey</h2>
+                <div id="map" style="height: 400px;"></div>
+            </div>
+        </section>
+
+        <section id="chart-section" class="parallax-section">
+            <div class="container">
+                <h2>Skills Overview</h2>
+                <canvas id="myChart" width="400" height="400"></canvas>
             </div>
         </section>
     </main>
