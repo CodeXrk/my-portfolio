@@ -90,6 +90,16 @@ body.dark-mode {
 }
 
 /* Pulley Indicator */
+
+.belt {
+    width: 10px;
+    background-color: var(--primary-color);
+    flex-grow: 1;
+    margin: 5px 0;
+    position: relative;
+    overflow: hidden;
+}
+
 .belt::before {
     content: '';
     position: absolute;
@@ -107,12 +117,8 @@ body.dark-mode {
         );
 }
 
-.top-gear {
-    animation: rotateGear 10s linear infinite;
-}
-
-.bottom-gear {
-    animation: rotateGear 10s linear infinite reverse;
+.top-gear, .bottom-gear {
+    transition: transform 0.1s linear;
 }
 
 @keyframes rotateGear {
