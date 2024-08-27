@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Pulley Indicator
-       function updateGearBelt() {
+    function updateGearBelt() {
         const scrollPercentage = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
         const rotation = scrollPercentage * 360;
         
