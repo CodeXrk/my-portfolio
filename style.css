@@ -90,33 +90,34 @@ body.dark-mode {
 }
 
 /* Pulley Indicator */
-.pulley-indicator {
-    position: fixed;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 30px;
-    height: 200px;
-    z-index: 1000;
-}
-
-.pulley-wheel {
-    width: 30px;
-    height: 30px;
-    border: 3px solid var(--primary-color);
-    border-radius: 50%;
+.belt::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 10px,
+            var(--bg-color) 10px,
+            var(--bg-color) 20px
+        );
 }
 
-.pulley-rope {
-    width: 4px;
-    height: 170px;
-    background-color: var(--primary-color);
-    position: absolute;
-    top: 30px;
-    left: 13px;
+.top-gear {
+    animation: rotateGear 10s linear infinite;
+}
+
+.bottom-gear {
+    animation: rotateGear 10s linear infinite reverse;
+}
+
+@keyframes rotateGear {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 /* Main Content */
