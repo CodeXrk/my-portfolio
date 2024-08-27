@@ -2,7 +2,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const cursor = document.getElementById('custom-cursor');
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const sections = document.querySelectorAll('.parallax-section');
-    const pulleyRope = document.querySelector('.pulley-rope');
+    const gearBelt = document.querySelector('.gear-belt-indicator');
+    const topGear = document.querySelector('.top-gear');
+    const bottomGear = document.querySelector('.bottom-gear');
+    const belt = document.querySelector('.belt');
     const navLinks = document.querySelectorAll('.nav-link');
     const loadingSpinner = document.getElementById('loading-spinner');
 
@@ -32,22 +35,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Pulley Indicator
-    function updatePulley() {
+       function updateGearBelt() {
         const scrollPercentage = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
-        const ropeHeight = pulleyRope.offsetHeight;
-        const wheelPosition = scrollPercentage * ropeHeight;
-        gsap.to('.pulley-wheel', { y: wheelPosition, duration: 0.3 });
+        const rotation = scrollPercentage * 360;
+        
+        topGear.style.transform = `rotate(${rotation}deg)`;
+        bottomGear.style.transform = `rotate(-${rotation}deg)`;
+        
+        const beltOffset = scrollPercentage * belt.offsetHeight;
+        belt.style.backgroundPosition = `0 ${beltOffset}px`;
     }
 
     window.addEventListener('scroll', () => {
-        if (!isThrottled) {
-            window.requestAnimationFrame(() => {
-                updatePulley();
-                updateActiveSection();
-                isThrottled = false;
-            });
-            isThrottled = true;
-        }
+        window.requestAnimationFrame(updateGearBelt);
+        });
     });
 
     // Update active section
