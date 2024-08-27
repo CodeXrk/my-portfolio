@@ -126,6 +126,36 @@ body.dark-mode {
     to { transform: rotate(360deg); }
 }
 
+.gear::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background-color: var(--bg-color);
+    border-radius: 50%;
+}
+
+.gear::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        repeating-conic-gradient(
+            from 0deg,
+            var(--primary-color) 0deg 30deg,
+            transparent 30deg 60deg
+        );
+    border-radius: 50%;
+    mask-image: radial-gradient(transparent 35%, black 35%);
+    -webkit-mask-image: radial-gradient(transparent 35%, black 35%);
+}
+
 /* Main Content */
 main {
     margin-top: 80px;
