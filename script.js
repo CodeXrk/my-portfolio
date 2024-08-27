@@ -47,9 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', () => {
-        window.requestAnimationFrame(updateGearBelt);
-        });
-    });
+        if (!isThrottled) {
+            window.requestAnimationFrame(() => {
+                updateGearBelt();
+                updateActiveSection();
+                // ... (keep any other existing scroll-related functions)
+                isThrottled = false;
+            });
+            isThrottled = true;
+        }
+    })
 
     // Update active section
     function updateActiveSection() {
