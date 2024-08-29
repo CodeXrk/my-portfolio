@@ -259,18 +259,6 @@ main {
     transition: transform 0.3s ease;
 }
 
-.project-item,
-.experience-item {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.project-item.in-view,
-.experience-item.in-view {
-    opacity: 1;
-    transform: translateY(0);
-}
 
 #hobbies ul {
     list-style-type: none;
